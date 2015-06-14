@@ -3,6 +3,7 @@
 #include <string.h>
 
 
+/* zadanie 1 */
 void reverse(char s[])
 {
     int length = strlen(s);
@@ -17,6 +18,7 @@ void reverse(char s[])
 }
 
 
+/* zadanie 2 */
 int strlen_with_null(char *s)
 {
     int i;
@@ -25,6 +27,7 @@ int strlen_with_null(char *s)
 }
 
 
+/* zadanie 3 */
 int power(int x, int p)
 {
     if(p <= 0)
@@ -33,6 +36,20 @@ int power(int x, int p)
 }
 
 
+int power_iter(int x, int p)
+{
+    int value = 1;  /* zazwyczaj tu sie dodaje do zmiennej to co zwraca 
+                       rekurencyjna wersja, tego smaego typu jest */
+
+    for(; p > 0; p--){
+        value = x * value;
+    }
+
+    return value;
+}
+
+
+/* zadanie 4 */
 int tab_sum(int *tab, int first, int length)
 {
     if(first >= length)
@@ -41,6 +58,20 @@ int tab_sum(int *tab, int first, int length)
 }
 
 
+int tab_sum_iter(int *tab, int first, int length)
+{
+    int value = 0;
+
+    for(; first < length; first++){ 
+        value = tab[first] + value;
+    }
+
+    return value;
+}
+
+
+/* zadanie 5 */
+/* przekombinowalem bo bez strcmp pisalem to */
 int search_string(char *s, char *t)
 {
     int len_s = strlen(s);
@@ -66,6 +97,7 @@ int search_string(char *s, char *t)
 }
 
 
+/* zadanie 6 */
 char *clone(char *s)
 {
     char *clone_s;
@@ -75,34 +107,66 @@ char *clone(char *s)
 }
 
 
-void read_and_write(int p)
-{
-    char str[100];
-
-    while (fgets(str, 100, stdin)){
-        if (strlen(str) > p)
-            printf("%s\n", str);
-    }
-}
-
-
+/* zadanie 7 */
 long fib(long n)
 {
     if(n <= 1)
         return n;
-    return fib(n - 1) + fib(n -2);
+    return fib(n - 1) + fib(n - 2);
 }
 
 
+long fib_iter(int n)
+{
+    long value_1 = 1;
+    long value_2 = 2;
+    long tmp;
+
+    for(; n > 2; n--){
+        tmp = value_2;
+        value_2 = value_2 + value_1;
+        value_1 = tmp;
+    }
+
+    return value_1;
+}
+
+
+/* szybsza wersja fib, bez niepotrzebnego drzewa rekurencji 
+   nie bylo tego na zajeciach, zrealizoeane przy uzyciu 2 funkcji
+   poniewarz w C argumenty w funkcji nie maja domyslnych wrtosci
+ */
 long _fib2(long p_n1, long p_n2, int c)
 {
     if(c < 1)
         return p_n1;
-    return _fib2(p_n2, p_n1 + p_n2, c -1);
+    return _fib2(p_n2, p_n1 + p_n2, c - 1);
 }
 
 
 long fib2(long n)
 {
     return _fib2(0, 1, n);
+}
+
+
+/* przyklad gratis by Wiola <3 */
+int silnia(int n)
+{
+    if(n <= 1)
+        return 1;
+
+    return n * silnia(n - 1);
+}
+
+
+int silnia_iter(int n)
+{
+    int value = 1;
+
+    for(; n > 1; n--){
+        value = n * value;
+    }
+
+    return value;
 }
